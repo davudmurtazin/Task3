@@ -1,10 +1,7 @@
 package by.tc.nb.bean;
 
-<<<<<<< HEAD
 import java.util.Date;
 
-=======
->>>>>>> Fixed errors
 public class AddNoteRequest extends Request {
 	private String note;
 	private String date;
