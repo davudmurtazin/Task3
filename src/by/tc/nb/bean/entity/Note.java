@@ -30,6 +30,6 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note: " + "content=" + content +", date=" + date;
+        return "Note: " + "content=" + content +", written date=" + date;
     }
 }
