@@ -10,9 +10,8 @@ import java.util.*;
  * Created by Davud_Murtazin on 10/4/2016.
  */
 public class UserMenu {
-    private static Scanner sc = new Scanner(System.in);
-    private static boolean flag = true;
-    private Controller controller = new Controller();
+    private static final Scanner sc = new Scanner(System.in);
+    private static final Controller controller = new Controller();
 
     private void getMenu(){
         System.out.println("Welcome to notebook organizer!=)\n" +
@@ -30,7 +29,7 @@ public class UserMenu {
     public void begin(){
         getMenu();
         int choice = sc.nextInt();
-        while(flag){
+        while(choice!=8){
             switch(choice){
                 case 1: addNote(); break;
                 case 2: findNoteByContent(); break;
@@ -39,45 +38,40 @@ public class UserMenu {
                 case 5: showAllNotes(); break;
                 case 6: readNotesFromFile(); break;
                 case 7: writeNotesToFile(); break;
-                case 8: close(flag);break;
                 default: System.out.println("Incorrect command! Enter again: "); break;
             }
         }
     }
 
-    private String inputUserData(){
-        String value = sc.nextLine();
-        return value;
-    }
-
     private void addNote() {
         System.out.println("Enter note to add: ");
         String content = new Scanner(System.in).nextLine();
-        Date date = new Date();
-        SimpleDateFormat formatDate = new SimpleDateFormat("dd.MM.yyyy");
-        String dateStr = (String)formatDate.format(date);
+
+        String dateStr = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+
         AddNoteRequest request = new AddNoteRequest();
         request.setCommandName("ADD_NEW_NOTE");
         request.setNote(content);
         request.setDate(dateStr);
 
         Response response = controller.doRequest(request);
-        if(response.isErrorStatus() ==  false){
+        if((!response.isErrorStatus())){
             System.out.println(response.getErrorMessage());
         }
     }
 
     private void findNoteByContent() {
         System.out.println("Enter text to find: ");
+
         String strFind = sc.nextLine();
         FindNoteByContentRequest request = new FindNoteByContentRequest();
         request.setCommandName("FIND_NOTE_BY_CONTENT");
         request.setContent(strFind);
 
-        FindNoteByContentResponse response = new FindNoteByContentResponse();
+        FindNoteByContentResponse response;
         response = (FindNoteByContentResponse) controller.doRequest(request);
         System.out.println("Notes containing: " + strFind);
-        List<Note> foundNotesByContent = new ArrayList<>();
+        List<Note> foundNotesByContent;
         foundNotesByContent = response.getFoundNotes();
         if (foundNotesByContent.size()!=0){
             for (Note note : foundNotesByContent) {
@@ -88,7 +82,7 @@ public class UserMenu {
         {
             System.out.println("No matches found!");
         }
-        if(response.isErrorStatus() ==  false){
+        if((!response.isErrorStatus())){
             System.out.println(response.getErrorMessage());
         }
     }
@@ -100,21 +94,20 @@ public class UserMenu {
         request.setCommandName("FIND_NOTE_BY_DATE");
         request.setDate(dateToFind);
 
-        FindNoteByContentResponse response = new FindNoteByContentResponse();
+        FindNoteByContentResponse response;
         response = (FindNoteByContentResponse)controller.doRequest(request);
-        List<Note> foundNotesByDate = new ArrayList<>();
+        List<Note> foundNotesByDate;
         foundNotesByDate = response.getFoundNotes();
         if (foundNotesByDate.size()!=0){
             for (Note note : foundNotesByDate) {
                 System.out.println(note);
             }
         }
-        else
-        {
+        else {
             System.out.println("No matches found!");
         }
 
-        if(response.isErrorStatus() ==  false){
+        if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
     }
@@ -124,7 +117,7 @@ public class UserMenu {
         request.setCommandName("CLEAT_NOTEBOOK");
 
         Response response = controller.doRequest(request);
-        if(response.isErrorStatus() ==  false){
+        if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
     }
@@ -132,9 +125,10 @@ public class UserMenu {
     private void showAllNotes() {
         ShowNotesRequest request = new ShowNotesRequest();
         request.setCommandName("SHOW_NOTES");
-        Response response = new Response();
+
+        Response response;
         response = controller.doRequest(request);
-        if(response.isErrorStatus() ==  true){
+        if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
     }
@@ -142,13 +136,14 @@ public class UserMenu {
     private void readNotesFromFile() {
         System.out.println("Enter file path to read notes: ");
         String filePath = sc.nextLine();
+
         ReadNoteFromFileRequest request = new ReadNoteFromFileRequest();
         request.setCommandName("READ_NOTES_FROM_FILE");
         request.setFilePath(filePath);
 
-        Response response = new Response();
+        Response response;
         response = controller.doRequest(request);
-        if(response.isErrorStatus() ==  true){
+        if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
     }
@@ -160,14 +155,10 @@ public class UserMenu {
         request.setCommandName("WRITE_NOTES_TO_FILE");
         request.setFilePath(filePath);
 
-        Response response = new Response();
+        Response response;
         response = controller.doRequest(request);
-        if(response.isErrorStatus() ==  true){
+        if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
-    }
-
-    private boolean close(boolean flag){
-        return flag=false;
     }
 }

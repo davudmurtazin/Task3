@@ -27,6 +27,12 @@ public class Controller {
 				response.setErrorMessage("ERROR!");
 			}
 		}
+<<<<<<< HEAD
+=======
+		else{
+			System.out.println("Incorrect command name!");
+		}
+>>>>>>> Fixed errors
 		return response;
 	}
 }

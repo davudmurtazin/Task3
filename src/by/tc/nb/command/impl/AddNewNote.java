@@ -10,13 +10,20 @@ import by.tc.nb.command.Command;
 import by.tc.nb.command.exception.CommandException;
 import by.tc.nb.source.NoteBookProvider;
 
+<<<<<<< HEAD
 import java.util.Date;
 
+=======
+>>>>>>> Fixed errors
 public class AddNewNote implements Command {
 
 	@Override
 	public Response execute(Request request) throws CommandException {
+<<<<<<< HEAD
 		AddNoteRequest req = null;
+=======
+		AddNoteRequest req = new AddNoteRequest();
+>>>>>>> Fixed errors
 		
 		if(request instanceof AddNoteRequest){
 			req = (AddNoteRequest)request;
@@ -28,9 +35,14 @@ public class AddNewNote implements Command {
 		String date = req.getDate();
 		
 		Note newNote = new Note(note, date);
+<<<<<<< HEAD
 		
 		NoteBook noteBook = NoteBookProvider.getInstance().getNoteBook();
 
+=======
+
+		NoteBook noteBook = NoteBookProvider.getInstance().getNoteBook();
+>>>>>>> Fixed errors
 		NoteBookUtil.addNoteToNoteBook(noteBook, newNote);
 
 		Response response = new Response();

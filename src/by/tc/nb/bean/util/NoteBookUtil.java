@@ -23,6 +23,7 @@ public class NoteBookUtil {
     }
 
     public static void showAllNotes(NoteBook noteBook) {
+        System.out.println("SHOW ALL NOTES");
         for (Note note : noteBook.getNotes()) {
             System.out.println(note);
         }
