@@ -1,9 +1,7 @@
-package by.tc.nb.util;
+package by.tc.nb.util.validate;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by Davud_Murtazin on 10/4/2016.

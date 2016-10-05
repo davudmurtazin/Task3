@@ -1,4 +1,4 @@
-package by.tc.nb.bean.util.validate;
+package by.tc.nb.util.validate;
 
 import by.tc.nb.bean.entity.Note;
 
@@ -23,9 +23,9 @@ public class Validator {
         }
     }
 
-    public static boolean isNote(String inputString) {
-        String regExp = "^\\[(([1-9])|(1[012])) (([1-9])|([12]\\d)|(3[01])) ((\\d){4})\\] (.*)";
-        if(inputString.matches(regExp)) {
+    public static boolean isNote(String lineFromFile) {
+        String regExp = "(0[1-9]|1[0-9]|2[0-9]|3[01])\\.(0[1-9]|1[012])\\.[0-9]{4}-(.*)";
+        if(lineFromFile.matches(regExp)) {
             return true;
         } else {
             return false;

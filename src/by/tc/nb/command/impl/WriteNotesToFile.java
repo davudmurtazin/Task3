@@ -4,14 +4,13 @@ import by.tc.nb.bean.Request;
 import by.tc.nb.bean.Response;
 import by.tc.nb.bean.WriteNotesToFileRequest;
 import by.tc.nb.bean.entity.NoteBook;
-import by.tc.nb.bean.util.NoteBookUtil;
+import by.tc.nb.util.NoteBookUtil;
 import by.tc.nb.command.Command;
 import by.tc.nb.command.exception.CommandException;
 import by.tc.nb.source.NoteBookProvider;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Davud_Murtazin on 9/29/2016.

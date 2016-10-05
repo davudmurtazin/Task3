@@ -5,7 +5,7 @@ import by.tc.nb.bean.Response;
 import by.tc.nb.command.Command;
 import by.tc.nb.command.exception.CommandException;
 import by.tc.nb.command.CommandHelper;
-import by.tc.nb.util.CommandNameValidator;
+import by.tc.nb.util.validate.CommandNameValidator;
 
 public class Controller {
 	private CommandHelper helper = new CommandHelper();
@@ -18,7 +18,6 @@ public class Controller {
 			String commandName = request.getCommandName();
 
 			Command command = helper.getCommand(commandName);
-
 			try {
 				response = command.execute(request);
 			} catch (CommandException e) {

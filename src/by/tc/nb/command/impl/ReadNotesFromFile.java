@@ -4,7 +4,7 @@ import by.tc.nb.bean.ReadNoteFromFileRequest;
 import by.tc.nb.bean.Request;
 import by.tc.nb.bean.Response;
 import by.tc.nb.bean.entity.NoteBook;
-import by.tc.nb.bean.util.NoteBookUtil;
+import by.tc.nb.util.NoteBookUtil;
 import by.tc.nb.command.Command;
 import by.tc.nb.command.exception.CommandException;
 import by.tc.nb.source.NoteBookProvider;
@@ -17,8 +17,6 @@ import java.io.IOException;
 public class ReadNotesFromFile implements Command {
     @Override
     public Response execute(Request request) throws CommandException {
-       // ReadNoteFromFileRequest req = new ReadNoteFromFileRequest();
-
         if (request instanceof ReadNoteFromFileRequest){
             NoteBook noteBook = NoteBookProvider.getInstance().getNoteBook();
             try{

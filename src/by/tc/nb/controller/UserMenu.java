@@ -3,6 +3,7 @@ package by.tc.nb.controller;
 import by.tc.nb.bean.*;
 import by.tc.nb.bean.entity.Note;
 
+import java.net.SecureCacheResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -12,6 +13,7 @@ import java.util.*;
 public class UserMenu {
     private static final Scanner sc = new Scanner(System.in);
     private static final Controller controller = new Controller();
+    private static final boolean flag = true;
 
     private void getMenu(){
         System.out.println("Welcome to notebook organizer!=)\n" +
@@ -27,9 +29,9 @@ public class UserMenu {
     }
 
     public void begin(){
-        getMenu();
-        int choice = sc.nextInt();
-        while(choice!=8){
+        while(flag){
+            getMenu();
+            int choice = sc.nextInt();
             switch(choice){
                 case 1: addNote(); break;
                 case 2: findNoteByContent(); break;
@@ -62,8 +64,8 @@ public class UserMenu {
 
     private void findNoteByContent() {
         System.out.println("Enter text to find: ");
-
-        String strFind = sc.nextLine();
+        Scanner scFind = new Scanner(System.in);
+        String strFind = scFind.nextLine();
         FindNoteByContentRequest request = new FindNoteByContentRequest();
         request.setCommandName("FIND_NOTE_BY_CONTENT");
         request.setContent(strFind);
@@ -77,26 +79,24 @@ public class UserMenu {
             for (Note note : foundNotesByContent) {
                 System.out.println(note);
             }
-        }
-        else
-        {
+        } else {
             System.out.println("No matches found!");
-        }
-        if((!response.isErrorStatus())){
+        } if((!response.isErrorStatus())){
             System.out.println(response.getErrorMessage());
         }
     }
 
     private void findNoteByDate() {
         System.out.println("Enter date to find: ");
-        String dateToFind = sc.nextLine();
+        Scanner scFind = new Scanner(System.in);
+        String dateToFind = scFind.nextLine();
         FindNoteByDateRequest request = new FindNoteByDateRequest();
         request.setCommandName("FIND_NOTE_BY_DATE");
         request.setDate(dateToFind);
 
-        FindNoteByContentResponse response;
-        response = (FindNoteByContentResponse)controller.doRequest(request);
-        List<Note> foundNotesByDate;
+        FindNoteByDateResponse response;
+        response = (FindNoteByDateResponse) controller.doRequest(request);
+        ArrayList<Note> foundNotesByDate;
         foundNotesByDate = response.getFoundNotes();
         if (foundNotesByDate.size()!=0){
             for (Note note : foundNotesByDate) {
@@ -134,29 +134,24 @@ public class UserMenu {
     }
 
     private void readNotesFromFile() {
-        System.out.println("Enter file path to read notes: ");
-        String filePath = sc.nextLine();
+        String filePath = "src/notebook.txt";
 
         ReadNoteFromFileRequest request = new ReadNoteFromFileRequest();
         request.setCommandName("READ_NOTES_FROM_FILE");
         request.setFilePath(filePath);
 
-        Response response;
-        response = controller.doRequest(request);
+        Response response = controller.doRequest(request);
         if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
     }
 
     private void writeNotesToFile(){
-        System.out.println("Enter file path to write notes: ");
-        String filePath = sc.nextLine();
+        String filePath = "src/notebook.txt";
         WriteNotesToFileRequest request = new WriteNotesToFileRequest();
         request.setCommandName("WRITE_NOTES_TO_FILE");
         request.setFilePath(filePath);
-
-        Response response;
-        response = controller.doRequest(request);
+        Response response = controller.doRequest(request);
         if(!response.isErrorStatus()){
             System.out.println(response.getErrorMessage());
         }
