@@ -71,20 +71,12 @@ public class NoteBookUtil {
     }
 
     public static void writeAllNotesToFile(String filePath, NoteBook notebook) throws IOException{
-
-        try{
-            PrintWriter fw = new PrintWriter(filePath);
-            for (Note note : notebook.getNotes()){
-                fw.println(note.toString());
-            }
-            System.out.println("Access written to file!");
-        }catch (IOException e){
-            new NoteBookUtilException("Can not write to file!");
-        }finally {
-            //fw.close();
+        PrintStream printStream = new PrintStream( new BufferedOutputStream(new FileOutputStream(filePath, true)));
+        for (Note note : notebook.getNotes()){
+            printStream.println(note.toString());
         }
-
-
+        System.out.println("Access written to file!");
+        printStream.close();
     }
 }
 

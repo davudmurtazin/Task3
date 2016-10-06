@@ -31,15 +31,15 @@ public class UserMenu {
     public void begin(){
         while(flag){
             getMenu();
-            int choice = sc.nextInt();
+            String choice = sc.nextLine();
             switch(choice){
-                case 1: addNote(); break;
-                case 2: findNoteByContent(); break;
-                case 3: findNoteByDate(); break;
-                case 4: clearNoteBook(); break;
-                case 5: showAllNotes(); break;
-                case 6: readNotesFromFile(); break;
-                case 7: writeNotesToFile(); break;
+                case "1": addNote(); break;
+                case "2": findNoteByContent(); break;
+                case "3": findNoteByDate(); break;
+                case "4": clearNoteBook(); break;
+                case "5": showAllNotes(); break;
+                case "6": readNotesFromFile(); break;
+                case "7": writeNotesToFile(); break;
                 default: System.out.println("Incorrect command! Enter again: "); break;
             }
         }
