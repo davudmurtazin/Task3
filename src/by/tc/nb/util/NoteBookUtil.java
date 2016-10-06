@@ -3,7 +3,6 @@ package by.tc.nb.util;
 import by.tc.nb.bean.entity.Note;
 import by.tc.nb.bean.entity.NoteBook;
 import by.tc.nb.util.validate.Validator;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 import java.io.*;
 import java.util.ArrayList;
